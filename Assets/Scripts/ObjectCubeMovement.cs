@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Object_Move : MonoBehaviour
+public class ObjectCubeMovement : MonoBehaviour
 {
     [SerializeField] private Vector3 _scaleDirection;
     [SerializeField] private float _moveSpeed;
