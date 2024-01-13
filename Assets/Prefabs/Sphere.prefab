@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 793575560749484557}
   - component: {fileID: 7188930193506188135}
   - component: {fileID: -959576732888693965}
-  - component: {fileID: 872012881993450925}
+  - component: {fileID: 5073865479040162284}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -131,7 +131,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &872012881993450925
+--- !u!114 &5073865479040162284
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,11 +140,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2563271458371936423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e20f6b382d4a774f8c76a715584f3b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 66571ec5e7f078049a6394cfe7ca96be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scaleDirection: {x: 0, y: 0, z: 0}
-  _moveDirection: {x: 0, y: 0, z: 1}
   _moveSpeed: 1
-  _scaleSpeed: 0
-  _rotateSpeed: 0
