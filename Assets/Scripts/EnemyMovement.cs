@@ -4,10 +4,21 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    private float _movementSpeed = 0.5f;
+    private float _movementSpeed = 0.1f;
+    private Vector2 _movementDirection;
+
+    private void Start()
+    {
+        
+    }
 
     private void Update()
     {
-        transform.Translate(Vector2.one * _movementSpeed * Time.deltaTime);
+        transform.Translate(_movementDirection * _movementSpeed * Time.deltaTime);
+    }
+
+    public void GetDirection(Vector2 direction)
+    {
+        _movementDirection = direction;
     }
 }
