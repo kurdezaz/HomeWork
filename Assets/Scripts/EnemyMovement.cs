@@ -7,11 +7,6 @@ public class EnemyMovement : MonoBehaviour
     private float _movementSpeed = 0.1f;
     private Vector2 _movementDirection;
 
-    private void Start()
-    {
-        
-    }
-
     private void Update()
     {
         transform.Translate(_movementDirection * _movementSpeed * Time.deltaTime);

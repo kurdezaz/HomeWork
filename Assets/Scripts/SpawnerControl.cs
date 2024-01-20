@@ -20,9 +20,11 @@ public class SpawnerControl : MonoBehaviour
         if (_timer <= 0)
         {
             _timer = _timeSpawn;
+            int minRandomRange = -10;
+            int maxRandomRange = 10;
             int numberSpawner = Random.Range(0, _spawnerTransform.Length);
-            int xVector = Random.Range(-10, 10);
-            int yVector = Random.Range(-10, 10);
+            int xVector = Random.Range(minRandomRange, maxRandomRange);
+            int yVector = Random.Range(minRandomRange, maxRandomRange);
             Vector2 _enemyVector = new Vector2(xVector, yVector);
             Instantiate(_enemyPrefab, _spawnerTransform[numberSpawner].position, _spawnerTransform[numberSpawner].rotation).GetDirection(_enemyVector);
         }
