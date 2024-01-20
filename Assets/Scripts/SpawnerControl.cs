@@ -7,6 +7,7 @@ public class SpawnerControl : MonoBehaviour
     [SerializeField] private EnemyMovement _enemyPrefab;
     [SerializeField] private float _timeSpawn = 2f;
     [SerializeField] private Transform[] _spawnerTransform;
+
     private float _timer;
 
     private void Start()
