@@ -12,7 +12,7 @@ public class EnemyMovement : MonoBehaviour
         transform.Translate(_movementDirection * _movementSpeed * Time.deltaTime);
     }
 
-    public void GetDirection(Vector2 direction)
+    public void SetupDirection(Vector2 direction)
     {
         _movementDirection = direction;
     }

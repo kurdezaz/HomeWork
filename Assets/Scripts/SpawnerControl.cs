@@ -26,7 +26,7 @@ public class SpawnerControl : MonoBehaviour
             int xVector = Random.Range(minRandomRange, maxRandomRange);
             int yVector = Random.Range(minRandomRange, maxRandomRange);
             Vector2 _enemyVector = new Vector2(xVector, yVector);
-            Instantiate(_enemyPrefab, _spawnerTransform[numberSpawner].position, _spawnerTransform[numberSpawner].rotation).GetDirection(_enemyVector);
+            Instantiate(_enemyPrefab, _spawnerTransform[numberSpawner].position, _spawnerTransform[numberSpawner].rotation).SetupDirection(_enemyVector);
         }
     }
 }
