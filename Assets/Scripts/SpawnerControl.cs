@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class SpawnerControl : MonoBehaviour
 {
-    [SerializeField] private EnemyMovement _enemyPrefab;
+    [SerializeField] private Spawner[] _enemySpawner;
     [SerializeField] private float _timeSpawn = 2f;
-    [SerializeField] private Transform[] _spawnerTransform;
 
     private float _timer;
 
@@ -21,13 +20,8 @@ public class SpawnerControl : MonoBehaviour
         if (_timer <= 0)
         {
             _timer = _timeSpawn;
-            int minRandomRange = -10;
-            int maxRandomRange = 10;
-            int numberSpawner = Random.Range(0, _spawnerTransform.Length);
-            int xVector = Random.Range(minRandomRange, maxRandomRange);
-            int yVector = Random.Range(minRandomRange, maxRandomRange);
-            Vector2 _enemyVector = new Vector2(xVector, yVector);
-            Instantiate(_enemyPrefab, _spawnerTransform[numberSpawner].position, _spawnerTransform[numberSpawner].rotation).SetupDirection(_enemyVector);
+             int numberEnemySpawner = Random.Range(0, _enemySpawner.Length);
+            _enemySpawner[numberEnemySpawner].CreateEnemy();
         }
     }
 }

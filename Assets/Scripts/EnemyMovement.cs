@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    private float _movementSpeed = 0.1f;
-    private Vector2 _movementDirection;
+    private float _movementSpeed = 0.5f;
+    private Transform _pointDestination;
 
     private void Update()
     {
-        transform.Translate(_movementDirection * _movementSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, _pointDestination.position, _movementSpeed * Time.deltaTime);
     }
 
-    public void SetupDirection(Vector2 direction)
+    public void SetupDestination(Transform transform)
     {
-        _movementDirection = direction;
+        _pointDestination = transform;
     }
 }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6581818126523848946}
   - component: {fileID: 2814169314545524492}
+  - component: {fileID: -1984946835552405759}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -86,3 +87,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-1984946835552405759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998869931677997289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4722f55e620c3c48bcbcedde553c3f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyPrefab: {fileID: 0}
+  _timeSpawn: 2
+  _spawnerTransform: {fileID: 0}
