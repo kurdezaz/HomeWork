@@ -9,7 +9,7 @@ public class PointMovement : MonoBehaviour
 
     private int _currentWaypoint = 0;
 
-    void Update()
+    private void Update()
     {
         Transform target = _waypoints[_currentWaypoint];
 
