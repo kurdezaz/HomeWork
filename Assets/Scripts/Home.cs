@@ -5,36 +5,32 @@ using UnityEngine;
 public class Home : MonoBehaviour
 {
     [SerializeField] private Player _player;
-    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private SoundController _soundController;
     [SerializeField] private float _timeVolume = 0.5f;
 
     private bool _isRobbed = false;
     private WaitForSeconds _wait;
 
-    void Start()
+    private void Start()
     {
         _wait = new WaitForSeconds(_timeVolume);
     }
 
-    private IEnumerator NonRobbedDelay()
+    private IEnumerator RobberyDelay()
     {
-        while(_audioSource.volume < 1)
+        for (float i = 0; i <= 1.1; i += 0.1f) 
         {
             yield return _wait;
-            _audioSource.volume += 0.1f;
+            _soundController.SetupVolume(i);
         }
 
         _isRobbed = true;
         _player.ActivePlayer();
-        StartCoroutine(RobbedDelay());
-    }
 
-    private IEnumerator RobbedDelay()
-    {
-        while (_audioSource.volume > 0)
+        for (float i = 1; i >= -0.1; i -= 0.1f) 
         {
             yield return _wait;
-            _audioSource.volume -= 0.1f;
+            _soundController.SetupVolume(i);
         }
     }
 
@@ -42,9 +38,9 @@ public class Home : MonoBehaviour
     {
         if (_isRobbed == false)
         {
-            _audioSource.Play();
-            _audioSource.volume = 0;
-            StartCoroutine(NonRobbedDelay());
+            _soundController.RunSound();
+            _soundController.SetupVolume(0);
+            StartCoroutine(RobberyDelay());
         }
     }
 }

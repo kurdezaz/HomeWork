@@ -7,24 +7,18 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform _waypointHome;
     [SerializeField] private Transform _waypointOut;
     [SerializeField] private float _speed = 0.5f;
-    
+
     private bool _isHome = false;
-    
-    void Update()
+    private Transform _target;
+
+    private void Start()
     {
-        if (_isHome == false)
-        {
-            Transform target = _waypointHome;
+        _target = _waypointHome;
+    }
 
-            transform.position = Vector2.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
-        }
-
-        if (_isHome == true)
-        {
-            Transform target = _waypointOut;
-
-            transform.position = Vector2.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
-        }
+    private void Update()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, _target.position, _speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -39,6 +33,7 @@ public class Player : MonoBehaviour
     {
         gameObject.SetActive(true);
         gameObject.GetComponent<SpriteRenderer>().flipX = true;
+        _target = _waypointOut;
         _isHome = true;
     }
 }
