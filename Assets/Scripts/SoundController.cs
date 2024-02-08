@@ -11,8 +11,18 @@ public class SoundController : MonoBehaviour
         _audioSource.Play();
     }
 
+    public void TurnOffSound()
+    {
+        _audioSource.Stop();
+    }
+
     public void SetupVolume(float volume)
     {
         _audioSource.volume = volume;
+    }
+
+    public float GetVolumeLevel()
+    {
+        return _audioSource.volume;
     }
 }

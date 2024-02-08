@@ -4,36 +4,27 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Transform _waypointHome;
-    [SerializeField] private Transform _waypointOut;
-    [SerializeField] private float _speed = 0.5f;
+    [SerializeField] private Transform[] _waypoints;
+    [SerializeField] private float _speed = 0.3f;
 
-    private bool _isHome = false;
-    private Transform _target;
-
-    private void Start()
-    {
-        _target = _waypointHome;
-    }
+    private int _currentWaypoint = 0;
 
     private void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, _target.position, _speed * Time.deltaTime);
-    }
+        Transform target = _waypoints[_currentWaypoint];
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (_isHome == false)
+        transform.position = Vector2.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
+
+        if (Vector2.Distance(transform.position, target.position) <= 0.2f)
         {
-            gameObject.SetActive(false);
-        }
-    }
+            _currentWaypoint++;
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
 
-    public void ActivePlayer()
-    {
-        gameObject.SetActive(true);
-        gameObject.GetComponent<SpriteRenderer>().flipX = true;
-        _target = _waypointOut;
-        _isHome = true;
+            if (_currentWaypoint >= _waypoints.Length)
+            {
+                _currentWaypoint = 0;
+                gameObject.GetComponent<SpriteRenderer>().flipX = false;
+            }
+        }
     }
 }

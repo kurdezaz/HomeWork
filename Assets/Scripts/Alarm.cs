@@ -8,32 +8,47 @@ public class Alarm : MonoBehaviour
     [SerializeField] private float _timeVolume = 0.5f;
 
     private WaitForSeconds _wait;
-    private int _upOrDownAlarm = 1;
+    private int _changeVolumeAlarm = 1;
 
     private void Start()
     {
         _wait = new WaitForSeconds(_timeVolume);
     }
 
-    private IEnumerator AlarmDelay()
-    {
-        float number = 0;
-
-        while (true)
-        {
-            yield return _wait;
-            number += _upOrDownAlarm * 0.1f;
-            _soundController.SetupVolume(Mathf.Clamp(number, 0, 1));
-        }
-    }
-
     public void ChangeDown()
     {
-        _upOrDownAlarm = -1;
+        _changeVolumeAlarm = -1;
+    }
+
+    public void ChangeUp()
+    {
+        _changeVolumeAlarm = 1;
     }
 
     public void StartAlarm()
     {
+        _soundController.RunSound();
+        ChangeUp();
         StartCoroutine(AlarmDelay());
+    }
+
+    private IEnumerator AlarmDelay()
+    {
+        float volumeLevel = 0;
+
+        while (true)
+        {
+            volumeLevel += _changeVolumeAlarm * 0.1f;
+            volumeLevel = Mathf.Clamp(volumeLevel, 0, 1);
+            _soundController.SetupVolume(volumeLevel);
+
+            if (_soundController.GetVolumeLevel() == 0)
+            {
+                _soundController.TurnOffSound();
+                StopCoroutine(AlarmDelay());
+            }
+
+            yield return _wait;
+        }
     }
 }
