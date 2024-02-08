@@ -12,10 +12,11 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Transform target = _waypoints[_currentWaypoint];
+        float distanceDestination = 0.2f;
 
         transform.position = Vector2.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
 
-        if (Vector2.Distance(transform.position, target.position) <= 0.2f)
+        if (Vector2.Distance(transform.position, target.position) <= distanceDestination)
         {
             _currentWaypoint++;
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
