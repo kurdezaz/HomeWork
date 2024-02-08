@@ -6,7 +6,8 @@ public class Home : MonoBehaviour
 {
     [SerializeField] private Player _player;
     [SerializeField] private SoundController _soundController;
-    [SerializeField] private float _timeVolume = 0.5f;
+    [SerializeField] private Alarm _alarm;
+    [SerializeField] private float _timeVolume = 6f;
 
     private bool _isRobbed = false;
     private WaitForSeconds _wait;
@@ -18,20 +19,10 @@ public class Home : MonoBehaviour
 
     private IEnumerator RobberyDelay()
     {
-        for (float i = 0; i <= 1.1; i += 0.1f) 
-        {
-            yield return _wait;
-            _soundController.SetupVolume(i);
-        }
-
+        yield return _wait;
         _isRobbed = true;
         _player.ActivePlayer();
-
-        for (float i = 1; i >= -0.1; i -= 0.1f) 
-        {
-            yield return _wait;
-            _soundController.SetupVolume(i);
-        }
+        _alarm.ChangeDown();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -41,6 +32,7 @@ public class Home : MonoBehaviour
             _soundController.RunSound();
             _soundController.SetupVolume(0);
             StartCoroutine(RobberyDelay());
+            _alarm.StartAlarm();
         }
     }
 }
