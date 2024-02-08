@@ -8,11 +8,17 @@ public class Home : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        _alarm.StartAlarm();
+        if(collision.gameObject.tag == "Player")
+        {
+            _alarm.StartAlarm();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _alarm.ChangeDown();
+        if (collision.gameObject.tag == "Player")
+        {
+            _alarm.ChangeDown();
+        }
     }
 }

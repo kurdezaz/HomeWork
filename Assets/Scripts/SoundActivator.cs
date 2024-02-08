@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundController : MonoBehaviour
+public class SoundActivator : MonoBehaviour
 {
     [SerializeField] private AudioSource _audioSource;
 

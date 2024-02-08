@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Alarm : MonoBehaviour
 {
-    [SerializeField] private SoundController _soundController;
+    [SerializeField] private SoundActivator _soundController;
     [SerializeField] private float _timeVolume = 0.5f;
 
     private WaitForSeconds _wait;
@@ -35,14 +35,17 @@ public class Alarm : MonoBehaviour
     private IEnumerator AlarmDelay()
     {
         float volumeLevel = 0;
+        float volumeStep = 0.1f;
+        float maxVolumelevel = 1;
+        float minVolumeLevel = 0;
 
         while (true)
         {
-            volumeLevel += _changeVolumeAlarm * 0.1f;
-            volumeLevel = Mathf.Clamp(volumeLevel, 0, 1);
+            volumeLevel += _changeVolumeAlarm * volumeStep;
+            volumeLevel = Mathf.Clamp(volumeLevel, minVolumeLevel, maxVolumelevel);
             _soundController.SetupVolume(volumeLevel);
 
-            if (_soundController.GetVolumeLevel() == 0)
+            if (_soundController.GetVolumeLevel() == minVolumeLevel)
             {
                 _soundController.TurnOffSound();
                 StopCoroutine(AlarmDelay());
