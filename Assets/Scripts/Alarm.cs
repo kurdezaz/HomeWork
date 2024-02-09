@@ -20,16 +20,16 @@ public class Alarm : MonoBehaviour
         _changeVolumeAlarm = -1;
     }
 
-    public void ChangeUp()
-    {
-        _changeVolumeAlarm = 1;
-    }
-
     public void StartAlarm()
     {
         _soundController.RunSound();
         ChangeUp();
         StartCoroutine(AlarmDelay());
+    }
+
+    private void ChangeUp()
+    {
+        _changeVolumeAlarm = 1;
     }
 
     private IEnumerator AlarmDelay()
@@ -39,19 +39,16 @@ public class Alarm : MonoBehaviour
         float maxVolumelevel = 1;
         float minVolumeLevel = 0;
 
-        while (true)
+        while (_soundController.Volume > minVolumeLevel)
         {
             volumeLevel += _changeVolumeAlarm * volumeStep;
             volumeLevel = Mathf.Clamp(volumeLevel, minVolumeLevel, maxVolumelevel);
             _soundController.SetupVolume(volumeLevel);
-
-            if (_soundController.GetVolumeLevel() == minVolumeLevel)
-            {
-                _soundController.TurnOffSound();
-                StopCoroutine(AlarmDelay());
-            }
-
             yield return _wait;
         }
+
+        _soundController.SetupVolume(maxVolumelevel);
+        _soundController.TurnOffSound();
+        StopCoroutine(AlarmDelay());
     }
 }

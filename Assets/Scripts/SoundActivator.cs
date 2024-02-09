@@ -6,6 +6,13 @@ public class SoundActivator : MonoBehaviour
 {
     [SerializeField] private AudioSource _audioSource;
 
+    public float Volume { get; private set; }
+
+    private void Update()
+    {
+        Volume = _audioSource.volume;
+    }
+
     public void RunSound()
     {
         _audioSource.Play();
@@ -19,10 +26,5 @@ public class SoundActivator : MonoBehaviour
     public void SetupVolume(float volume)
     {
         _audioSource.volume = volume;
-    }
-
-    public float GetVolumeLevel()
-    {
-        return _audioSource.volume;
     }
 }
