@@ -9,7 +9,7 @@ public class Home : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject == _player.gameObject)
+        if(collision.gameObject.TryGetComponent(out Player player) == _player.gameObject.TryGetComponent(out Player player1))
         {
             _alarm.StartAlarm();
         }
@@ -17,7 +17,7 @@ public class Home : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject == _player.gameObject)
+        if (collision.gameObject.TryGetComponent(out Player player) == _player.gameObject.TryGetComponent(out Player player1))
         {
             _alarm.ChangeDown();
         }
