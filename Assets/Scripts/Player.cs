@@ -14,8 +14,6 @@ public class Player : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
 
-    private int _coins = 0;
-
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -43,10 +41,5 @@ public class Player : MonoBehaviour
         {
             _spriteRenderer.flipX = false;
         }
-    }
-
-    public void TakeCoin()
-    {
-        _coins++;
     }
 }

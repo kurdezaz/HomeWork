@@ -35,7 +35,8 @@ public class Enemy : MonoBehaviour
 
         if (Vector2.Distance(transform.position, target.position) <= distanceDestination)
         {
-            _currentWaypoint = ++_currentWaypoint % _waypoints.Length;
+            _currentWaypoint++;
+            _currentWaypoint %= _waypoints.Length;
         }
     }
 }
