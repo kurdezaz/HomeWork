@@ -23,7 +23,6 @@ public class PlayerAnimator : MonoBehaviour
     {
         _animator.SetFloat("HorizontalMove", Mathf.Abs(_playerInput.PlayerMovement));
         
-
         if (_playerInput.PlayerMovement < 0)
         {
             _spriteRenderer.flipX = true;
@@ -33,7 +32,7 @@ public class PlayerAnimator : MonoBehaviour
             _spriteRenderer.flipX = false;
         }
 
-        if (_playerCollision.IsCollision)
+        if (Input.GetKey(KeyCode.Mouse0))
         {
             _animator.SetBool("IsAttack", true);
         }
@@ -42,5 +41,4 @@ public class PlayerAnimator : MonoBehaviour
             _animator.SetBool("IsAttack", false);
         }
     }
-
 }

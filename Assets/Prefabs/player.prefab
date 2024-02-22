@@ -16,8 +16,9 @@ GameObject:
   - component: {fileID: 4365222602832625776}
   - component: {fileID: 3577776063249785208}
   - component: {fileID: 4106004758243699005}
-  - component: {fileID: 8938619117874717976}
   - component: {fileID: 7015107471522468625}
+  - component: {fileID: 9103378361552641398}
+  - component: {fileID: 8102122110753580506}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -224,19 +225,6 @@ MonoBehaviour:
   _playerInput: {fileID: 4365222602832625776}
   _playerCollision: {fileID: 7015107471522468625}
   _enemyMovement: {fileID: 0}
---- !u!114 &8938619117874717976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3167943080382352607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6148e1e77521e649b301f171dc09c2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerHealth: 100
 --- !u!114 &7015107471522468625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,6 +237,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3119b8b5512c4dc46b2f0c029ec6b96d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9103378361552641398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3167943080382352607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97e6b367e31fcb49a15862e0d5b1646, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerCollision: {fileID: 7015107471522468625}
+  _damage: 50
+  _attackCooldown: 1
+--- !u!114 &8102122110753580506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3167943080382352607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e326c16afd973ab429d2cadf6f2a0770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 100
 --- !u!1 &3322911853407999358
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,7 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e724aadbb8f39438d272851dd01de8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerHealth: {fileID: 8938619117874717976}
+  _playerHealth: {fileID: 0}
 --- !u!1 &6446571488178508600
 GameObject:
   m_ObjectHideFlags: 0

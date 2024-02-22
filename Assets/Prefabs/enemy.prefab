@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 4487777796517987420}
   - component: {fileID: 1165841730732350673}
   - component: {fileID: 1204169947073974657}
-  - component: {fileID: 1945553109849494254}
+  - component: {fileID: 7285925273198285913}
+  - component: {fileID: 4996893949255348901}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Untagged
@@ -211,8 +212,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be62b7f1b85f4f64fa1e820527e9a726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerHealth: {fileID: 0}
-  _enemyMovement: {fileID: 4487777796517987420}
+  _enemyMovement: {fileID: 0}
+  _enemyAttack: {fileID: 4996893949255348901}
   _damage: 10
   _attackCooldown: 1
 --- !u!114 &1204169947073974657
@@ -229,7 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyMovement: {fileID: 4487777796517987420}
   _enemy: {fileID: 1165841730732350673}
---- !u!114 &1945553109849494254
+--- !u!114 &7285925273198285913
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -238,10 +239,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1556094298590597041}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59ffc999ed7b34f46afd4f114ecbacbb, type: 3}
+  m_Script: {fileID: 11500000, guid: e326c16afd973ab429d2cadf6f2a0770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyHealth: 100
+  _health: 100
+--- !u!114 &4996893949255348901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556094298590597041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772fe38d95a5b7f47b81381f6ec3f0ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 10
+  _attackCooldown: 1
 --- !u!1 &3423886783504629487
 GameObject:
   m_ObjectHideFlags: 0

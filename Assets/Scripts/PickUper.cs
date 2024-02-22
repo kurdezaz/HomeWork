@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PickUper : MonoBehaviour
 {
-    [SerializeField] private PlayerHealth _playerHealth;
+    [SerializeField] private Health _playerHealth;
 
     private int _coins = 0;
 
