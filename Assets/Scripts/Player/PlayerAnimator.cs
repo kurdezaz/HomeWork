@@ -10,6 +10,9 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] private PlayerCollision _playerCollision;
     [SerializeField] private EnemyMovement _enemyMovement;
 
+    private const string HorizontalMove = "HorizontalMove";
+    private const string IsAttack = "IsAttack";
+
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
 
@@ -21,7 +24,7 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Update()
     {
-        _animator.SetFloat("HorizontalMove", Mathf.Abs(_playerInput.PlayerMovement));
+        _animator.SetFloat(HorizontalMove, Mathf.Abs(_playerInput.PlayerMovement));
         
         if (_playerInput.PlayerMovement < 0)
         {
@@ -34,11 +37,11 @@ public class PlayerAnimator : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Mouse0))
         {
-            _animator.SetBool("IsAttack", true);
+            _animator.SetBool(IsAttack, true);
         }
         else
         {
-            _animator.SetBool("IsAttack", false);
+            _animator.SetBool(IsAttack, false);
         }
     }
 }

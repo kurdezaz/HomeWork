@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private PlayerMovement _playerMovement;
+
     public float PlayerMovement { get; private set; }
 
     private void Start()
