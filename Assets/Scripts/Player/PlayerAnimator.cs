@@ -6,12 +6,12 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimator : MonoBehaviour
 {
+    private const string HorizontalMove = "HorizontalMove";
+    private const string IsAttack = "IsAttack";
+
     [SerializeField] private PlayerInput _playerInput;
     [SerializeField] private PlayerCollision _playerCollision;
     [SerializeField] private EnemyMovement _enemyMovement;
-
-    private const string HorizontalMove = "HorizontalMove";
-    private const string IsAttack = "IsAttack";
 
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;

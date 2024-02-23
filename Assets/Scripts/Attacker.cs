@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Attack : MonoBehaviour
+public class Attacker : MonoBehaviour
 {
     [SerializeField] private int _damage = 10;
     [SerializeField] private float _attackCooldown = 1f;

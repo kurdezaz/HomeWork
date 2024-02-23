@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class MedPills : MonoBehaviour
 {
-    [SerializeField] private int Health = 50;
-    public int AmountHeal { get; private set; }
-
-    private void Start()
-    {
-        AmountHeal = Health;
-    }
+    [field: SerializeField] public int AmountHeal { get; private set; }
 
     public void PickUp()
     {

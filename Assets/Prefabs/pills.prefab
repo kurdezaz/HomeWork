@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cceefd1f4e0dc6a4581ad50830574674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 50
+  <AmountHeal>k__BackingField: 50
 --- !u!61 &6831145305337579627
 BoxCollider2D:
   m_ObjectHideFlags: 0

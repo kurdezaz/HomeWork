@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerCollision _playerCollision;
-    [SerializeField] private Attack _playerAttack;
+    [SerializeField] private Attacker _playerAttack;
 
     private void Update()
     {

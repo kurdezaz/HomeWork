@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemyMovement _enemyMovement;
-    [SerializeField] private Attack _enemyAttack;
+    [SerializeField] private Attacker _enemyAttack;
     
     public bool IsPursuit { get; private set; } = false;
     public Health PlayerHealth { get; private set; }

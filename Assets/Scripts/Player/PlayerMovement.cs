@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float _maxJumpSpeed = 0.05f;
     private float _maxRunSpeed = 5f;
+    private float _runSpeed = 6f;
 
     private void Start()
     {
@@ -23,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Mathf.Abs(_rigidbody.velocity.x) < _maxRunSpeed)
         {
-            _rigidbody.AddForce(new Vector2(_playerInput.PlayerMovement, 0), ForceMode2D.Impulse);
+            _rigidbody.velocityX = _playerInput.PlayerMovement * _runSpeed;
         }
     }
 

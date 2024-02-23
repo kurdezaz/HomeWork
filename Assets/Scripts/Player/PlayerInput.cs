@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
+    private const string Horizontal = "Horizontal";
+
     [SerializeField] private PlayerMovement _playerMovement;
 
     public float PlayerMovement { get; private set; }
@@ -16,7 +18,7 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        PlayerMovement = Input.GetAxis("Horizontal");
+        PlayerMovement = Input.GetAxis(Horizontal);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
