@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class MedPills : MonoBehaviour
 {
-    [field: SerializeField] public int AmountHeal { get; private set; }
+    [SerializeField] private Health _playerHealth;
+    [SerializeField] public int _amountHeal;
 
     public void PickUp()
     {
-        Destroy(gameObject);
+        _playerHealth.TakeHeal(_amountHeal);
+        gameObject.SetActive(false);
     }
 }

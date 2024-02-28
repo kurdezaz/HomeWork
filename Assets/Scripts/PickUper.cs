@@ -18,7 +18,6 @@ public class PickUper : MonoBehaviour
         
         if (collision.gameObject.TryGetComponent(out MedPills medPills))
         {
-            _playerHealth.TakeHeal(medPills.AmountHeal);
             medPills.PickUp();
         }
     }

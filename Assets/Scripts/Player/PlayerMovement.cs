@@ -15,12 +15,12 @@ public class PlayerMovement : MonoBehaviour
     private float _maxRunSpeed = 5f;
     private float _runSpeed = 6f;
 
-    private void Start()
+    private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (Mathf.Abs(_rigidbody.velocity.x) < _maxRunSpeed)
         {

@@ -12,7 +12,7 @@ public class Attacker : MonoBehaviour
     private WaitForSeconds _wait;
     private Coroutine _attackCoroutine;
 
-    private void Start()
+    private void Awake()
     {
         _wait = new WaitForSeconds(_attackCooldown);
     }

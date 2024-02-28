@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] private int _health = 100;
+
+    public event Action Die;
 
     private int maxHealth = 100;
     private int minHealth = 0;
@@ -15,9 +18,9 @@ public class Health : MonoBehaviour
         _health = Mathf.Clamp(_health, minHealth, maxHealth);
         Debug.Log(_health);
 
-        if (_health == 0 && gameObject.TryGetComponent(out Enemy enemy))
+        if (_health == 0)
         {
-            Destroy(gameObject);
+            Die?.Invoke();
         }
     }
 

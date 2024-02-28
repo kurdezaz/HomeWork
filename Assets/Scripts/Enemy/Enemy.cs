@@ -6,9 +6,20 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemyMovement _enemyMovement;
     [SerializeField] private Attacker _enemyAttack;
+    [SerializeField] private Health _enemyHealth;
     
     public bool IsPursuit { get; private set; } = false;
     public Health PlayerHealth { get; private set; }
+
+    private void OnEnable()
+    {
+        _enemyHealth.Die += DieEnemy;
+    }
+
+    private void OnDisable()
+    {
+        _enemyHealth.Die -= DieEnemy;
+    }
 
     private void Update()
     {
@@ -26,8 +37,7 @@ public class Enemy : MonoBehaviour
             IsPursuit = true;
         }
 
-        if (collision.gameObject.TryGetComponent(out Health playerHealth)
-            && collision.gameObject.TryGetComponent(out Player playerActive))
+        if (collision.gameObject.TryGetComponent(out Health playerHealth))
         {
             PlayerHealth = playerHealth;
         }
@@ -38,5 +48,10 @@ public class Enemy : MonoBehaviour
         {
             IsPursuit = false;
         }
+    }
+
+    private void DieEnemy()
+    {
+        Destroy(gameObject);
     }
 }
