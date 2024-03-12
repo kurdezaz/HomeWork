@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour
 {
     [SerializeField] private int _health = 100;
-
     [SerializeField] private TextMeshProUGUI _textBar;
     [SerializeField] private Slider _slider;
     [SerializeField] private Slider _sliderSmooth;
@@ -62,8 +61,6 @@ public class Health : MonoBehaviour
                 _currentHealth++;
             }
         }
-
-        
     }
 
     public void TakeDamage(int damage)
