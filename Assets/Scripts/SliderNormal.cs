@@ -10,10 +10,22 @@ public class SliderNormal : MonoBehaviour
     {
         _slider.maxValue = _playerHealth.MaxHealth;
         _slider.minValue = _playerHealth.MinHealth;
+        _slider.value = _playerHealth.PlayerHealth;
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        _slider.value = _playerHealth.PlayerHealth;
+        _playerHealth.HealthChanged += DisplayValue;
+    }
+
+    private void OnDisable()
+    {
+        _playerHealth.HealthChanged -= DisplayValue;
+    }
+
+    private void DisplayValue()
+    {
+        float playerHealth = _playerHealth.PlayerHealth;
+        _slider.value = playerHealth;
     }
 }

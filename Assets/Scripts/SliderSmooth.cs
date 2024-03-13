@@ -8,47 +8,56 @@ public class SliderSmooth : MonoBehaviour
     [SerializeField] private Slider _sliderSmooth;
     [SerializeField] private float _timeSlider = 0.1f;
 
-    private int _currentPlayerHealth = 0;
+    private float _healthChangeRate = 10f;
+    private float _minChangeRate = 1f;
+    private float _maxChangeRate;
+    private float _currentPlayerHealth;
     private WaitForSeconds _wait;
     private Coroutine _sliderCoroutine;
 
     private void Start()
     {
         _wait = new WaitForSeconds(_timeSlider);
+        _maxChangeRate = _playerHealth.PlayerHealth;
         _currentPlayerHealth = _playerHealth.PlayerHealth;
         _sliderSmooth.minValue = _playerHealth.MinHealth;
         _sliderSmooth.maxValue = _playerHealth.MaxHealth;
+        _sliderSmooth.value = _playerHealth.PlayerHealth;
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        _sliderSmooth.value = _currentPlayerHealth;
+        _playerHealth.HealthChanged += DisplayValue;
+    }
 
+    private void OnDisable()
+    {
+        _playerHealth.HealthChanged -= DisplayValue;
+    }
+
+    private void DisplayValue()
+    {
         if (_sliderCoroutine == null && _currentPlayerHealth != _playerHealth.PlayerHealth)
         {
             _sliderCoroutine = StartCoroutine(SliderDelay());
-        }
-        else if (_sliderCoroutine != null && _currentPlayerHealth == _playerHealth.PlayerHealth)
-        {
-            StopCoroutine(_sliderCoroutine);
-            _sliderCoroutine = null;
         }
     }
 
     private IEnumerator SliderDelay()
     {
-        while (_currentPlayerHealth != _playerHealth.PlayerHealth)
+        float playerHealth = _playerHealth.PlayerHealth;
+
+        while (_currentPlayerHealth != playerHealth)
         {
             yield return _wait;
 
-            if (_currentPlayerHealth > _playerHealth.PlayerHealth)
-            {
-                _currentPlayerHealth--;
-            }
-            else if (_currentPlayerHealth < _playerHealth.PlayerHealth)
-            {
-                _currentPlayerHealth++;
-            }
+            playerHealth = _playerHealth.PlayerHealth;
+            float changeRate = Mathf.Abs(_currentPlayerHealth - playerHealth) / _healthChangeRate;
+            changeRate = Mathf.Clamp(changeRate, _minChangeRate, _maxChangeRate);
+            _currentPlayerHealth = Mathf.MoveTowards(_currentPlayerHealth, playerHealth, changeRate);
+            _sliderSmooth.value = _currentPlayerHealth;
         }
+
+        _sliderCoroutine = null;
     }
 }
