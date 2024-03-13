@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
     public float MaxHealth { get; private set; } = 100;
     public float MinHealth { get; private set; } = 0;
 
-    public event Action HealthChanged;
+    public event Action Changed;
    
     public void TakeDamage(int damage)
     {
@@ -17,7 +17,7 @@ public class Health : MonoBehaviour
             PlayerHealth -= damage;
             PlayerHealth = Mathf.Clamp(PlayerHealth, MinHealth, MaxHealth);
 
-            HealthChanged?.Invoke();
+            Changed?.Invoke();
         }
     }
 
@@ -28,7 +28,7 @@ public class Health : MonoBehaviour
             PlayerHealth += heal;
             PlayerHealth = Mathf.Clamp(PlayerHealth, MinHealth, MaxHealth);
 
-            HealthChanged?.Invoke();
+            Changed?.Invoke();
         }
     }
 }

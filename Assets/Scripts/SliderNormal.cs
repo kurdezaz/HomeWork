@@ -1,9 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SliderNormal : MonoBehaviour
+public class SliderNormal : BaseClassView
 {
-    [SerializeField] private Health _playerHealth;
     [SerializeField] private Slider _slider;
 
     private void Start()
@@ -13,17 +12,7 @@ public class SliderNormal : MonoBehaviour
         _slider.value = _playerHealth.PlayerHealth;
     }
 
-    private void OnEnable()
-    {
-        _playerHealth.HealthChanged += DisplayValue;
-    }
-
-    private void OnDisable()
-    {
-        _playerHealth.HealthChanged -= DisplayValue;
-    }
-
-    private void DisplayValue()
+    public override void DisplayValue()
     {
         float playerHealth = _playerHealth.PlayerHealth;
         _slider.value = playerHealth;

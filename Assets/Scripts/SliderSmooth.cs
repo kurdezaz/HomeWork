@@ -2,9 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SliderSmooth : MonoBehaviour
+public class SliderSmooth : BaseClassView
 {
-    [SerializeField] private Health _playerHealth;
     [SerializeField] private Slider _sliderSmooth;
     [SerializeField] private float _timeSlider = 0.1f;
 
@@ -25,17 +24,7 @@ public class SliderSmooth : MonoBehaviour
         _sliderSmooth.value = _playerHealth.PlayerHealth;
     }
 
-    private void OnEnable()
-    {
-        _playerHealth.HealthChanged += DisplayValue;
-    }
-
-    private void OnDisable()
-    {
-        _playerHealth.HealthChanged -= DisplayValue;
-    }
-
-    private void DisplayValue()
+    public override void DisplayValue()
     {
         if (_sliderCoroutine == null && _currentPlayerHealth != _playerHealth.PlayerHealth)
         {
