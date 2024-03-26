@@ -22,14 +22,7 @@ public class EnemyAnimator : MonoBehaviour
 
     private void Update()
     {
-        if (_enemyMovement.Distance.x < 0)
-        {
-            _sprite.flipX = true;
-        }
-        else
-        {
-            _sprite.flipX = false;
-        }
+        _sprite.flipX = _enemyMovement.Distance.x < 0;
 
         if (Mathf.Abs(_enemyMovement.Distance.x) <= _enemyMovement.DistanceDestination && _enemy.IsPursuit)
         {
