@@ -23,8 +23,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (Mathf.Abs(_enemyMovement.Distance.x) <= _enemyMovement.DistanceDestination &&
-            IsPursuit && _enemyAttack.CanAttack)
+        if (Mathf.Abs(_enemyMovement.Distance.x) <= _enemyMovement.DistanceDestination && IsPursuit)
         {
             _enemyAttack.StartAttack(PlayerHealth);
         }

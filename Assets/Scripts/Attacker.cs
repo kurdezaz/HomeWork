@@ -10,9 +10,6 @@ public class Attacker : MonoBehaviour
     [SerializeField] private float _attackCooldown = 1f;
     [SerializeField] private int _vampiricAttackCooldown = 6;
 
-    public bool CanAttack { get; private set; } = true;
-    public bool CanSpecialAttack { get; private set; } = true;
-
     private WaitForSeconds _wait;
     private Coroutine _attackCoroutine;
 
