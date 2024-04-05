@@ -177,7 +177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca9d6fcf84f1b04c808939ae6a7b488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackDelay: 1
-  _bulletSpeed: 5
+  _attackDelay: 2
   _bullet: {fileID: -7849409669260847825, guid: dd390349a3e753c4f96e7606974c6902, type: 3}
-  _generator: {fileID: 5276171912795527561, guid: 6ff1a71a327d5d6489f5cb636cc1e011, type: 3}
+  _generator: {fileID: 0}
+  _objectPool: {fileID: 0}
+  _enemyBird: {fileID: -1546106923962605648}

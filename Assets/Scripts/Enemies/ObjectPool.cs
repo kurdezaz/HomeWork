@@ -8,8 +8,6 @@ public class ObjectPool : MonoBehaviour
 
     private Queue<EnemyBirdAttack> _enemyPool;
    
-    public IEnumerable<EnemyBirdAttack> PooledEnemies => _enemyPool;
-   
     private void Awake()
     {
         _enemyPool = new Queue<EnemyBirdAttack>();

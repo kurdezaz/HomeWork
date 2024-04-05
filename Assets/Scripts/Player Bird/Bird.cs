@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BirdMover))]
@@ -6,9 +8,15 @@ using UnityEngine;
 [RequireComponent(typeof(BirdCollisionHandler))]
 public class Bird : MonoBehaviour
 {
+    [SerializeField] private PlayerBullet _playerBullet;
+    [SerializeField] private PlayerBulletGenerator _bulletGenerator;
+
     private BirdMover _birdMover;
     private ScoreCounter _scoreCounter;
     private BirdCollisionHandler _handler;
+
+    private float _delay = 0.5f;
+    private Coroutine _attackCoroutine;
 
     public event Action GameOver;
 
@@ -19,6 +27,14 @@ public class Bird : MonoBehaviour
         _birdMover = GetComponent<BirdMover>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Mouse0) && _attackCoroutine == null)
+        {
+            _attackCoroutine = StartCoroutine(GeneratePlayerBullets());
+        }
+    }
+
     private void OnEnable()
     {
         _handler.CollisionDetected += ProcessCollision;
@@ -27,6 +43,15 @@ public class Bird : MonoBehaviour
     private void OnDisable()
     {
         _handler.CollisionDetected -= ProcessCollision;
+    }
+
+    private IEnumerator GeneratePlayerBullets()
+    {
+        var wait = new WaitForSeconds(_delay);
+
+        Spawn();
+        yield return wait;
+        _attackCoroutine = null;
     }
 
     private void ProcessCollision(IInteractable interactable)
@@ -42,9 +67,23 @@ public class Bird : MonoBehaviour
         }
     }
 
+    public void ScoreUp()
+    {
+        _scoreCounter.Add();
+    }
+
     public void Reset()
     {
         _scoreCounter.Reset();
         _birdMover.Reset();
+    }
+
+    private void Spawn()
+    {
+        Vector3 spawnPoint = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
+        _playerBullet = _bulletGenerator.GetBullet();
+        _playerBullet.gameObject.SetActive(true);
+        _playerBullet.transform.position = spawnPoint;
     }
 }

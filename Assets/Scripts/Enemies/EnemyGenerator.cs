@@ -1,13 +1,16 @@
 using System.Collections;
 using UnityEngine;
 
-public class PipeGenerator : MonoBehaviour
+public class EnemyGenerator : MonoBehaviour
 {
     [SerializeField] private float _delay;
     [SerializeField] private float _lowerBound;
     [SerializeField] private float _upperBound;
     [SerializeField] private ObjectPool _pool;
     [SerializeField] private EnemyBirdAttack _enemyBird;
+    [SerializeField] private EnemyBullerGenerator _bullerGenerator;
+    [SerializeField] private PlayerBulletGenerator _playerGenerator;
+    [SerializeField] private Bird _bird;
 
     private void Start()
     {
@@ -22,7 +25,6 @@ public class PipeGenerator : MonoBehaviour
         {
             yield return wait;
             Spawn();
-            
         }
     }
 
@@ -34,6 +36,7 @@ public class PipeGenerator : MonoBehaviour
         _enemyBird = _pool.GetEnemy();
         _enemyBird.gameObject.SetActive(true);
         _enemyBird.StartAttack();
+        _enemyBird.Init(_bullerGenerator, _pool, _playerGenerator, _bird);
         _enemyBird.transform.position = spawnPoint;
     }
 }

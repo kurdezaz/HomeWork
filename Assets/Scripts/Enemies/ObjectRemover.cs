@@ -3,9 +3,8 @@ using UnityEngine;
 public class ObjectRemover : MonoBehaviour
 {
     [SerializeField] private ObjectPool _pool;
-    [SerializeField] private BullerGenerator _poolBullets;
-    [SerializeField] private EnemyBirdAttack _poolEnemies;
-    [SerializeField] private EnemyBullet _poolBullet;
+    [SerializeField] private EnemyBullerGenerator _poolEnemyBullets;
+    [SerializeField] private PlayerBulletGenerator _poolPlayerBullets;
 
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -16,9 +15,12 @@ public class ObjectRemover : MonoBehaviour
 
         if (other.TryGetComponent(out EnemyBullet bullet))
         {
-            _poolBullets.PutBullet(bullet);
-            
+            _poolEnemyBullets.PutBullet(bullet);
         }
 
+        if (other.TryGetComponent(out PlayerBullet playerBullet))
+        {
+            _poolPlayerBullets.PutBullet(playerBullet);
+        }
     }
 }

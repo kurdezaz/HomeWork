@@ -5,18 +5,21 @@ using UnityEngine;
 public class EnemyBirdAttack : MonoBehaviour
 {
     [SerializeField] private float _attackDelay;
-    [SerializeField] private float _bulletSpeed;
     [SerializeField] private EnemyBullet _bullet;
-    [SerializeField] private BullerGenerator _generator;
+    [SerializeField] private EnemyBullerGenerator _enemyGenerator;
+    [SerializeField] private PlayerBulletGenerator _playerGenerator;
+    [SerializeField] private ObjectPool _objectPool;
+    [SerializeField] private EnemyBirdAttack _enemyBird;
+    [SerializeField] private Bird _bird;
 
-    
-
-   // public IEnumerable<EnemyBullet> PooledBullets => _bulletPool;
-
-    private void Awake()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-
-
+        if (other.TryGetComponent(out PlayerBullet bullet))
+        {
+            _playerGenerator.PutBullet(bullet);
+            _objectPool.PutEnemy(_enemyBird);
+            _bird.ScoreUp();
+        }
     }
 
     private IEnumerator LaunchBullets()
@@ -27,33 +30,29 @@ public class EnemyBirdAttack : MonoBehaviour
         {
             yield return wait;
             Spawn();
-            //_enemy.Spawn(GetBullet()) ;
         }
     }
-
-
-
-
 
     public void StartAttack()
     {
         StartCoroutine(LaunchBullets());
     }
 
+    public void Init(EnemyBullerGenerator bullerGenerator, ObjectPool objectPool,
+        PlayerBulletGenerator playerBulletGenerator, Bird bird)
+    {
+        _enemyGenerator = bullerGenerator;
+        _objectPool = objectPool;
+        _playerGenerator = playerBulletGenerator;
+        _bird = bird;
+    }
+
     public void Spawn()
     {
         Vector3 spawnPoint = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
-        _bullet = _generator.GetBullet();
-        
-
+        _bullet = _enemyGenerator.GetBullet();
         _bullet.gameObject.SetActive(true);
         _bullet.transform.position = spawnPoint;
     }
-
-  /*  public Vector3 Location()
-    {
-        Vector3 spawnPoint = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        return spawnPoint;
-    }*/
 }
