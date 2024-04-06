@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4452319093309121681}
   - component: {fileID: 7566696702491915353}
   - component: {fileID: 9116508398861951333}
+  - component: {fileID: -5288220287033053197}
   - component: {fileID: -1546106923962605648}
   m_Layer: 0
   m_Name: Enemy Bird
@@ -165,6 +166,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73ef893b0f08a6b4eba030e0381af1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5288220287033053197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3017266289358186946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3559dbcde565c7c46b7213435c2520d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerGenerator: {fileID: 0}
+  _objectPool: {fileID: 0}
+  _enemyBird: {fileID: -1546106923962605648}
+  _bird: {fileID: 0}
 --- !u!114 &-1546106923962605648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,6 +196,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackDelay: 2
   _bullet: {fileID: -7849409669260847825, guid: dd390349a3e753c4f96e7606974c6902, type: 3}
-  _generator: {fileID: 0}
-  _objectPool: {fileID: 0}
+  _enemyGenerator: {fileID: 0}
   _enemyBird: {fileID: -1546106923962605648}

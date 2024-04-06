@@ -8,10 +8,8 @@ public class EnemyGenerator : MonoBehaviour
     [SerializeField] private float _upperBound;
     [SerializeField] private ObjectPool _pool;
     [SerializeField] private EnemyBirdAttack _enemyBird;
-    [SerializeField] private EnemyBullerGenerator _bullerGenerator;
-    [SerializeField] private PlayerBulletGenerator _playerGenerator;
-    [SerializeField] private Bird _bird;
-
+    [SerializeField] private EnemyInit _enemyInit;
+    
     private void Start()
     {
         StartCoroutine(GeneratePipes());
@@ -35,8 +33,8 @@ public class EnemyGenerator : MonoBehaviour
 
         _enemyBird = _pool.GetEnemy();
         _enemyBird.gameObject.SetActive(true);
+        _enemyInit.Init(_enemyBird);
         _enemyBird.StartAttack();
-        _enemyBird.Init(_bullerGenerator, _pool, _playerGenerator, _bird);
         _enemyBird.transform.position = spawnPoint;
     }
 }

@@ -7,20 +7,7 @@ public class EnemyBirdAttack : MonoBehaviour
     [SerializeField] private float _attackDelay;
     [SerializeField] private EnemyBullet _bullet;
     [SerializeField] private EnemyBullerGenerator _enemyGenerator;
-    [SerializeField] private PlayerBulletGenerator _playerGenerator;
-    [SerializeField] private ObjectPool _objectPool;
     [SerializeField] private EnemyBirdAttack _enemyBird;
-    [SerializeField] private Bird _bird;
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.TryGetComponent(out PlayerBullet bullet))
-        {
-            _playerGenerator.PutBullet(bullet);
-            _objectPool.PutEnemy(_enemyBird);
-            _bird.ScoreUp();
-        }
-    }
 
     private IEnumerator LaunchBullets()
     {
@@ -38,13 +25,9 @@ public class EnemyBirdAttack : MonoBehaviour
         StartCoroutine(LaunchBullets());
     }
 
-    public void Init(EnemyBullerGenerator bullerGenerator, ObjectPool objectPool,
-        PlayerBulletGenerator playerBulletGenerator, Bird bird)
+    public void Init(EnemyBullerGenerator bullerGenerator)
     {
         _enemyGenerator = bullerGenerator;
-        _objectPool = objectPool;
-        _playerGenerator = playerBulletGenerator;
-        _bird = bird;
     }
 
     public void Spawn()
