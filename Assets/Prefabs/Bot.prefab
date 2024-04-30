@@ -99,9 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 123900b7f1a8d314a96034231f119b6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 1
-  _rotateSpeed: 0
-  _bot: {fileID: 4304540670917618828}
+  _moveSpeed: 2
+  _rotateSpeed: 1
+  _resourceCounter: {fileID: 0}
 --- !u!54 &-1196362988001752949
 Rigidbody:
   m_ObjectHideFlags: 0

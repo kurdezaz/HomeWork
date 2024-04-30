@@ -75,6 +75,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c3b8786ba873454790a3b3cbc1ebda6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6257344527918781783}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c3b8786ba873454790a3b3cbc1ebda6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2497960002583542437}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c3b8786ba873454790a3b3cbc1ebda6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -7708215838351592099}
   m_SourcePrefab: {fileID: 100100000, guid: 5c3b8786ba873454790a3b3cbc1ebda6, type: 3}
 --- !u!1 &4025362679063188915 stripped
 GameObject:
@@ -94,9 +100,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bot: {fileID: 4304540670917618828, guid: 08c99ea223e305a4da22cfab42159958, type: 3}
-  _countBots: 1
+  _botCreator: {fileID: 0}
+  _resourceScaner: {fileID: 0}
+  _resources: []
+  _bots: []
+--- !u!114 &2497960002583542437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4025362679063188915}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a98cc5c5c808584db24290652b452e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bot: {fileID: 4304540670917618828, guid: 08c99ea223e305a4da22cfab42159958, type: 3}
+  _base: {fileID: 6257344527918781783}
+  _resourceCounter: {fileID: 0}
+  <CountBots>k__BackingField: 0
+  _bots: []
+--- !u!114 &-7708215838351592099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4025362679063188915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 182c3bb3bdc508e44bc9ca3464bd287e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 20
+  _base: {fileID: 6257344527918781783}
   _layerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
-  _radius: 10
+    m_Bits: 64
   _colliders: []
+  _resources: []
