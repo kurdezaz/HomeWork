@@ -6,7 +6,7 @@ public class Bot : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _rotateSpeed;
-    [SerializeField] private Bot _bot;
+    [SerializeField] private ResourceCounter _resourceCounter;
 
     private Resource _resource;
     private Vector3 _pointDestination;
@@ -24,6 +24,31 @@ public class Bot : MonoBehaviour
         {
             MovePointBase();
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out Resource resource) && _resource == resource)
+        {
+            resource.transform.position = this.transform.position;
+            resource.transform.parent = this.transform;
+            _isCarry = true;
+        }
+
+        if (other.TryGetComponent(out BotCreator home) && _isCarry == true)
+        {
+            _isCarry = false;
+            _resourceCounter.TakeResource();
+            _resource.transform.parent = null;
+            _resource.gameObject.SetActive(false);
+            home.AddBot(this);
+            this.gameObject.SetActive(false);
+        }
+    }
+
+    public void Init(ResourceCounter resourceCounter)
+    {
+        _resourceCounter = resourceCounter;
     }
 
     public void GetPointDestination(Vector3 destination)
@@ -49,23 +74,5 @@ public class Bot : MonoBehaviour
     private void MovePointBase()
     {
         transform.position = Vector3.MoveTowards(transform.position, _pointBase, _moveSpeed * Time.deltaTime);
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.TryGetComponent(out Resource resource) && _resource == resource)
-        {
-            resource.SetupResourcePosition(transform.position);
-            _isCarry = true;
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-         if (other.TryGetComponent(out Base home) && _isCarry == true)
-         {
-             _isCarry = false;
-             home.PutBot(_bot);
-         }
     }
 }

@@ -6,41 +6,38 @@ public class Base : MonoBehaviour
 {
     [SerializeField] private Bot _bot;
     [SerializeField] private LayerMask _layerMask;
+    [SerializeField] private BotCreator _botCreator;
 
     [SerializeField] private int _countBots;
     [SerializeField] private float _radius;
     [SerializeField] private Collider[] _colliders;
     [SerializeField] private List<Resource> _resources = new List<Resource>();
 
-    private List<Bot> _bots = new List<Bot>();
+    [SerializeField] private List<Bot> _bots = new List<Bot>();
 
     private void Start()
     {
-        CreateBots();
-        ScaningResources();
+       // ScaningResources();
     }
 
     private void Update()
     {
         SendBots();
+        
     }
 
-    public void PutBot(Bot bot)
+   /* public void AddBot(Bot bot)
     {
         _bots.Add(bot);
-        bot.gameObject.SetActive(false);
+    }*/
+
+    public void Init(List<Bot> bots)
+    {
+        Debug.Log("Peredano");
+        _bots = bots;
     }
 
-    private void CreateBots()
-    {
-        for (int i = 0; i < _countBots; i++)
-        {
-            var bot = Instantiate(_bot);
-            bot.transform.position = gameObject.transform.position;
-            _bots.Add(bot);
-            bot.gameObject.SetActive(false);
-        }
-    }
+    
 
     private void ScaningResources()
     {
@@ -55,18 +52,28 @@ public class Base : MonoBehaviour
 
     private void SendBots()
     {
-        if (_bots.Count > 0 && _resources.Count > 0)
+       // Debug.Log(_bots.Count);
+       // Debug.Log(_resources.Count);
+
+        if (_botCreator.GetListBot().Count > 0 && _resources.Count > 0)
         {
-            var bot = _bots[0];
+            Debug.Log("Send");
+            var bot = _botCreator.GetNumeredBot(0);
             var resource = _resources[0];
 
-            _bots.Remove(bot);
+            //_bots.Remove(bot);
+            _botCreator.DeleteBot(bot);
             _resources.Remove(resource);
 
             bot.gameObject.SetActive(true);
             bot.GetPointDestination(resource.transform.position);
             bot.GetPointBase(transform.position);
             bot.GetResources(resource);
+        }
+        else if (_botCreator.GetListBot().Count == _countBots && _resources.Count == 0)
+        {
+            Debug.Log("Scaning");
+            ScaningResources();
         }
     }
 }

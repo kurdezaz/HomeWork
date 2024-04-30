@@ -20,7 +20,6 @@ public class ResourceGenerator : MonoBehaviour
             var resource = Instantiate(_resource);
             resource.transform.position =
                 new Vector3(transform.position.x + randomizeX, transform.position.y, transform.position.z + randomizeZ);
-            resource.Init(_resourceCounter);
         }
     }
 }

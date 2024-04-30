@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class ResourceCounter : MonoBehaviour
 {
-    public int ResourceCount { get; private set; }
-
     public event Action Changed;
+
+    public int ResourceCount { get; private set; }
 
     public void TakeResource()
     {
