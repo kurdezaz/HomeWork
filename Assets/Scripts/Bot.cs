@@ -6,19 +6,27 @@ public class Bot : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _rotateSpeed;
-    [SerializeField] private ResourceCounter _resourceCounter;
-
+    
+    private ResourceCounter _resourceCounter;
+    private Base _newBase;
+    private Base _base;
     private Resource _resource;
+    private Flag _flag;
     private Vector3 _pointDestination;
     private Vector3 _pointBase;
 
     private bool _isCarry;
+    private bool _isCreateNewBase;
     
     private void Update()
     {
-        if (_isCarry == false)
+        if (_isCarry == false && _isCreateNewBase == false)
         {
             MovePointDestination();
+        }
+        else if (_isCreateNewBase)
+        {
+            MovePointNewBase();
         }
         else
         {
@@ -35,14 +43,25 @@ public class Bot : MonoBehaviour
             _isCarry = true;
         }
 
-        if (other.TryGetComponent(out BotCreator home) && _isCarry == true)
+        if (other.TryGetComponent(out Base home) && _isCarry == true)
         {
             _isCarry = false;
             _resourceCounter.TakeResource();
             _resource.transform.parent = null;
             _resource.gameObject.SetActive(false);
             home.AddBot(this);
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
+        }
+
+        if (other.TryGetComponent(out Flag flag) && _isCreateNewBase)
+        {
+            _isCreateNewBase = false;
+            var basa = Instantiate(_newBase);
+            basa.transform.position = transform.position;
+            basa.AddBot(this);
+            gameObject.SetActive(false);
+            _base.OffActiveBase();
+            _base.CloseOrderNewBase();
         }
     }
 
@@ -66,9 +85,34 @@ public class Bot : MonoBehaviour
         _resource = resource;
     }
 
+    public void InitBase(Base base1)
+    {
+        _base = base1;
+    }
+
+    public void InitNewBase(Base newBase)
+    {
+        _newBase = newBase;
+    }
+
+    public void GetFlag (Flag flag)
+    {
+        _flag = flag;
+    }
+
+    public void OrderCreateNewBase()
+    {
+        _isCreateNewBase = true;
+    }
+
     private void MovePointDestination()
     {
         transform.position = Vector3.MoveTowards(transform.position, _pointDestination, _moveSpeed * Time.deltaTime);
+    }
+
+    private void MovePointNewBase()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, _flag.transform.position, _moveSpeed * Time.deltaTime);
     }
 
     private void MovePointBase()

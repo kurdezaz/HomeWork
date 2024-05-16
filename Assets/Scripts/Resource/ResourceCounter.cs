@@ -15,4 +15,14 @@ public class ResourceCounter : MonoBehaviour
 
         Changed?.Invoke();
     }
+
+    public void CreateBot(int oneBotCost)
+    {
+        ResourceCount -= oneBotCost;
+    }
+
+    public void CreateBase(int oneBaseCost)
+    {
+        ResourceCount -= oneBaseCost;
+    }
 }

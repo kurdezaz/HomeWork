@@ -17,9 +17,12 @@ public class ResourceScaner : MonoBehaviour
         foreach (var collider in _colliders)
         {
             collider.TryGetComponent(out Resource resource1);
-            _resources.Add(resource1);
-        }
 
-        _base.InitResources(_resources);
+            if (_resources.Contains(resource1) == false)
+            {
+                _resources.Add(resource1);
+                _base.AddResources(resource1);
+            }
+        }
     }
 }
