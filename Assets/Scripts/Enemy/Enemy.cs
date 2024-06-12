@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
 
     private Vector3 _distance = new Vector3(0, 0, 0);
     private float _distanceDestination = 3f;
+    private float _speed = 0.5f;
     private Rigidbody _rigidbody;
 
     private void Awake()
@@ -22,7 +23,7 @@ public class Enemy : MonoBehaviour
 
         if (Mathf.Abs(_distance.x) >= _distanceDestination || Mathf.Abs(_distance.z) >= _distanceDestination)
         {
-            _rigidbody.velocity = _distance;
+            _rigidbody.velocity = _distance * _speed;
         }
     }
 }
