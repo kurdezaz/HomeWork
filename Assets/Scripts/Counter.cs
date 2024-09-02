@@ -6,10 +6,9 @@ public class Counter : MonoBehaviour
 {
     private float _delay = 0.5f;
     private bool _isButtonOn;
+    private int _count;
 
-    public int Count { get; private set; }
-
-    public event Action Changed;
+    public event Action<int> Changed;
 
     private void Update()
     {
@@ -35,8 +34,8 @@ public class Counter : MonoBehaviour
         while (_isButtonOn)
         {
             yield return wait;
-            Count++;
-            Changed?.Invoke();
+            _count++;
+            Changed?.Invoke(_count);
         }
     }
 }

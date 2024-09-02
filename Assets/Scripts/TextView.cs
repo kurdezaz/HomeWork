@@ -16,8 +16,8 @@ public class TextView : MonoBehaviour
         _counter.Changed -= DisplayCount;
     }
 
-    private void DisplayCount()
+    private void DisplayCount(int count)
     {
-        _textView.text = _counter.Count.ToString();
+        _textView.text = count.ToString();
     }
 }
