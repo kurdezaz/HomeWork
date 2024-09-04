@@ -11,7 +11,7 @@ public class ClickHandler : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
-        float chance = UnityEngine.Random.Range(_minRandomValue, _maxRandomValue);
+        float chance = Random.Range(_minRandomValue, _maxRandomValue);
 
         if (chance <= _cube.Probability)
         {

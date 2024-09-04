@@ -38,6 +38,6 @@ public class CubeSpawner : MonoBehaviour
         clickHandler.InitSpawner(this);
         clickHandler.InitExploder(_cubeExploder);
 
-        _explodableObjects.Add(cube.GetComponent<Rigidbody>());
+        _explodableObjects.Add(cube.ReturnRigidbody());
     }
 }

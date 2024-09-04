@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(MeshRenderer))]
 public class ColorChanger : MonoBehaviour
 {
     private void Awake()
@@ -7,7 +8,7 @@ public class ColorChanger : MonoBehaviour
         GetComponent<MeshRenderer>().material.color = RandomColor();
     }
 
-    Color RandomColor()
+    private Color RandomColor()
     {
         float red = Random.Range(0f, 1f);
         float green = Random.Range(0f, 1f);
