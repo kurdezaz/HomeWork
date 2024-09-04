@@ -1,21 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ColorChanger : MonoBehaviour
 {
-    private void Start()
+    private void Awake()
     {
         GetComponent<MeshRenderer>().material.color = RandomColor();
     }
 
     Color RandomColor()
     {
-        float r = Random.Range(0f, 1f);
-        float g = Random.Range(0f, 1f);
-        float b = Random.Range(0f, 1f);
-        float a = 1f;
+        float red = Random.Range(0f, 1f);
+        float green = Random.Range(0f, 1f);
+        float blue = Random.Range(0f, 1f);
+        float alfa = 1f;
 
-        return new Color(r, g, b, a);
+        return new Color(red, green, blue, alfa);
     }
 }

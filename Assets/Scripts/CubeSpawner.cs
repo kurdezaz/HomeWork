@@ -3,23 +3,23 @@ using UnityEngine;
 
 public class CubeSpawner : MonoBehaviour
 {
+    [SerializeField] private Cube _cube;
+    [SerializeField] private CubeExploder _cubeExploder;
+
     private List<Rigidbody> _explodableObjects = new List<Rigidbody>();
 
-    private float _probability = 100;
+    private float _halfNumber = 2;
     private float _minCubesCount = 2;
     private float _maxCubesCount = 6;
 
-    public void SpawnCubes()
+    public void SpawnCubes(Vector3 scale, float chance, Vector3 transform)
     {
+        _explodableObjects.Clear();
+
         for (int i = 1; i <= Random.Range(_minCubesCount, _maxCubesCount); i++)
         {
-            CreateNewCube();
+            CreateNewCube(scale,chance,transform);
         }
-    }
-
-    public float TransferProbability()
-    {
-        return _probability;
     }
 
     public List<Rigidbody> TransferExplodableObjects()
@@ -27,20 +27,17 @@ public class CubeSpawner : MonoBehaviour
         return _explodableObjects;
     }
 
-    private void CreateNewCube()
+    private void CreateNewCube(Vector3 scale, float chance, Vector3 transform)
     {
-        CubeSpawner cube = Instantiate(this);
+        Cube cube = Instantiate(_cube);
 
-        cube.gameObject.transform.localScale =
-            new Vector3(transform.localScale.x / 2, transform.localScale.y / 2, transform.localScale.z / 2);
-        cube.HalveChance(_probability);
-        cube.transform.position = transform.position;
+        cube.transform.localScale = scale / _halfNumber;
+        cube.HalveChance(chance);
+        cube.transform.position = transform;
+        var clickHandler = cube.GetComponent<ClickHandler>();
+        clickHandler.InitSpawner(this);
+        clickHandler.InitExploder(_cubeExploder);
 
         _explodableObjects.Add(cube.GetComponent<Rigidbody>());
-    }
-
-    private void HalveChance(float chance)
-    {
-        _probability = chance / 2;
     }
 }
