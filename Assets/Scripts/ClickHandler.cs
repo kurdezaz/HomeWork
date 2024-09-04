@@ -1,34 +1,40 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ClickHandler : MonoBehaviour
 {
-    [SerializeField] private Cube _cube;
+    [SerializeField] private Camera _camera;
     [SerializeField] private CubeSpawner _cubeSpawner;
     [SerializeField] private CubeExploder _cubeExploder;
 
     private float _minRandomValue = 0f;
     private float _maxRandomValue = 100f;
+    private float _distance = 500;
 
-    private void OnMouseUpAsButton()
+    private void Update()
     {
-        float chance = Random.Range(_minRandomValue, _maxRandomValue);
+        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
-        if (chance <= _cube.Probability)
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, _distance))
         {
-            _cubeSpawner.SpawnCubes(this.transform.localScale, _cube.Probability, transform.position);
-            _cubeExploder.Explode(_cubeSpawner.TransferExplodableObjects(), transform.position);
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (hit.collider.TryGetComponent(out Cube cube))
+                {
+                    float chance = Random.Range(_minRandomValue, _maxRandomValue);
+                    
+                    if (chance <= cube.Probability)
+                    {
+                        List<Rigidbody> explodableObjects = _cubeSpawner.SpawnCubes(cube);
+
+                        _cubeExploder.Explode(explodableObjects, cube.transform.position);
+                    }
+
+                    Destroy(cube.gameObject);
+                }
+            }
         }
-
-        Destroy(gameObject);
-    }
-
-    public void InitSpawner(CubeSpawner cubeSpawner)
-    {
-        _cubeSpawner = cubeSpawner;
-    }
-
-    public void InitExploder(CubeExploder cubeExploder)
-    {
-        _cubeExploder = cubeExploder;
     }
 }
