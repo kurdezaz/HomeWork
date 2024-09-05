@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class CubeSpawner : MonoBehaviour
 {
-    private float _halfNumber = 2;
     private float _minCubesCount = 2;
     private float _maxCubesCount = 6;
 
@@ -24,10 +23,7 @@ public class CubeSpawner : MonoBehaviour
     private Rigidbody CreateNewCube(Cube cube)
     {
         Cube newCube = Instantiate(cube);
-
-        newCube.transform.localScale /= _halfNumber;
-        newCube.DivideChance(cube.Probability);
-        newCube.transform.position = cube.transform.position;
+        newCube.Init(cube);
         
         return newCube.Rigidbody;
     }

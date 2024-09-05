@@ -5,7 +5,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody))]
 public class Cube : MonoBehaviour
 {
-    private float divider = 2;
+    private float _coefficient = 2;
 
     public float Probability { get; private set; } = 100;
     public Rigidbody Rigidbody { get; private set; }
@@ -15,8 +15,15 @@ public class Cube : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody>();
     }
 
-    public void DivideChance(float chance)
+    public void Init(Cube cube)
     {
-        Probability = chance / divider;
+        transform.localScale /= _coefficient;
+        DivideChance(cube.Probability);
+        transform.position = cube.transform.position;
+    }
+    
+    private void DivideChance(float chance)
+    {
+        Probability = chance / _coefficient;
     }
 }
