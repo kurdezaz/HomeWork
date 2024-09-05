@@ -51,5 +51,4 @@ public class CubeExploder : MonoBehaviour
 
         return explosionRadius;
     }
-
 }
