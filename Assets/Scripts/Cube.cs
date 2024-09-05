@@ -5,24 +5,18 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody))]
 public class Cube : MonoBehaviour
 {
-    private Rigidbody _rigidbody;
-
-    private float _halfNumber = 2;
+    private float divider = 2;
 
     public float Probability { get; private set; } = 100;
+    public Rigidbody Rigidbody { get; private set; }
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        Rigidbody = GetComponent<Rigidbody>();
     }
 
-    public Rigidbody ReturnRigidbody()
+    public void DivideChance(float chance)
     {
-        return _rigidbody;
-    }
-
-    public void HalveChance(float chance)
-    {
-        Probability = chance / _halfNumber;
+        Probability = chance / divider;
     }
 }

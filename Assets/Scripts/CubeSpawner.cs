@@ -11,7 +11,9 @@ public class CubeSpawner : MonoBehaviour
     {
         List<Rigidbody> explodableObjects = new List<Rigidbody>();
 
-        for (int i = 1; i <= Random.Range(_minCubesCount, _maxCubesCount); i++)
+        float randomNumber = Random.Range(_minCubesCount, _maxCubesCount);
+
+        for (int i = 0; i < randomNumber; i++)
         {
             explodableObjects.Add(CreateNewCube(cube));
         }
@@ -24,9 +26,9 @@ public class CubeSpawner : MonoBehaviour
         Cube newCube = Instantiate(cube);
 
         newCube.transform.localScale /= _halfNumber;
-        newCube.HalveChance(cube.Probability);
+        newCube.DivideChance(cube.Probability);
         newCube.transform.position = cube.transform.position;
         
-        return newCube.ReturnRigidbody();
+        return newCube.Rigidbody;
     }
 }

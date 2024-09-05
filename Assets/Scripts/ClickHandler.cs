@@ -7,6 +7,7 @@ public class ClickHandler : MonoBehaviour
     [SerializeField] private CubeSpawner _cubeSpawner;
     [SerializeField] private CubeExploder _cubeExploder;
 
+    private int _clickRightMouseButton = 0;
     private float _minRandomValue = 0f;
     private float _maxRandomValue = 100f;
     private float _distance = 500;
@@ -19,7 +20,7 @@ public class ClickHandler : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, _distance))
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(_clickRightMouseButton))
             {
                 if (hit.collider.TryGetComponent(out Cube cube))
                 {
