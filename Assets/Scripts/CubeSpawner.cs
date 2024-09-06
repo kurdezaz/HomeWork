@@ -33,9 +33,15 @@ public class CubeSpawner : MonoBehaviour
         float randomizeZ = Random.Range(minRange, maxRange);
         var cube = _cubePool.GetCube(_cubePrefab);
         cube.gameObject.SetActive(true);
-        cube.TryGetComponent(out CubeCollider cubeCollider);
-        cubeCollider.Init(_cubePool);
+        cube.Changed += PutCube;
         cube.transform.position =
             new Vector3(transform.position.x + randomizeX, transform.position.y, transform.position.z + randomizeZ);
+    }
+
+    private void PutCube(Cube cube)
+    {
+        cube.Changed -= PutCube;
+        _cubePool.PutCube(cube);
+        
     }
 }
