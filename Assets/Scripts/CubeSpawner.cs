@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CubeSpawner : MonoBehaviour
@@ -34,7 +33,8 @@ public class CubeSpawner : MonoBehaviour
         float randomizeZ = Random.Range(minRange, maxRange);
         var cube = _cubePool.GetCube(_cubePrefab);
         cube.gameObject.SetActive(true);
-        cube.Init(_cubePool);
+        cube.TryGetComponent(out CubeCollider cubeCollider);
+        cubeCollider.Init(_cubePool);
         cube.transform.position =
             new Vector3(transform.position.x + randomizeX, transform.position.y, transform.position.z + randomizeZ);
     }

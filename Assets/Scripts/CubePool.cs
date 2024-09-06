@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,9 +14,7 @@ public class CubePool : MonoBehaviour
     {
         if (_cubePool.Count == 0)
         {
-            var cube = Instantiate(cubePrefab);
-
-            return cube;
+            return Instantiate(cubePrefab);
         }
 
         return _cubePool.Dequeue();
