@@ -8,7 +8,7 @@ public class Cube : MonoBehaviour
     private MeshRenderer _meshRenderer;
     private bool _isCollisied = false;
 
-    private float _minLifeTime = 5f;
+    private float _minLifeTime = 2f;
     private float _maxLifeTime = 5f;
 
     public event Action<Cube> Died;
