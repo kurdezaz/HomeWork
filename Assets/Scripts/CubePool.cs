@@ -5,26 +5,26 @@ public class CubePool : MonoBehaviour
 {
     [SerializeField] private Cube _cubePrefab;
 
-    private Queue<Cube> _objectsPool;
+    private Queue<Cube> _cubes;
 
     private void Awake()
     {
-        _objectsPool = new Queue<Cube>();
+        _cubes = new Queue<Cube>();
     }
 
     public Cube GetCube()
     {
-        if (_objectsPool.Count == 0)
+        if (_cubes.Count == 0)
         {
             return Instantiate(_cubePrefab);
         }
 
-        return _objectsPool.Dequeue();
+        return _cubes.Dequeue();
     }
 
     public void PutCube(Cube cubePrefabs)
     {
         cubePrefabs.gameObject.SetActive(false);
-        _objectsPool.Enqueue(cubePrefabs);
+        _cubes.Enqueue(cubePrefabs);
     }
 }
