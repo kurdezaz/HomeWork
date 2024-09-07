@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class CubeSpawner : MonoBehaviour
 {
-    [SerializeField] private Cube _cubePrefab;
     [SerializeField] private CubePool _cubePool;
 
     private float _delay = 1f;
@@ -26,16 +25,9 @@ public class CubeSpawner : MonoBehaviour
 
     private void CreateCube()
     {
-        float minRange = -6;
-        float maxRange = 6;
-
-        float randomizeX = Random.Range(minRange, maxRange);
-        float randomizeZ = Random.Range(minRange, maxRange);
-        var cube = _cubePool.GetCube(_cubePrefab);
-        cube.gameObject.SetActive(true);
+        var cube = _cubePool.GetCube();
+        cube.Init(transform.position);
         cube.Died += PutCube;
-        cube.transform.position =
-            new Vector3(transform.position.x + randomizeX, transform.position.y, transform.position.z + randomizeZ);
     }
 
     private void PutCube(Cube cube)

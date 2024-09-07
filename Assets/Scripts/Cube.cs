@@ -7,8 +7,9 @@ public class Cube : MonoBehaviour
 {
     private MeshRenderer _meshRenderer;
     private bool _isCollisied = false;
+    private Color _colorWhite = Color.white;
 
-    private float _minLifeTime = 5f;
+    private float _minLifeTime = 2f;
     private float _maxLifeTime = 5f;
 
     public event Action<Cube> Died;
@@ -16,7 +17,6 @@ public class Cube : MonoBehaviour
     private void Awake()
     {
         _meshRenderer = GetComponent<MeshRenderer>();
-        _meshRenderer.material.color = Color.white;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -38,8 +38,21 @@ public class Cube : MonoBehaviour
         var wait = new WaitForSeconds(timeDelay);
 
         yield return wait;
-        _meshRenderer.material.color = Color.white;
+        _meshRenderer.material.color = _colorWhite;
         _isCollisied = false;
         Died?.Invoke(this);
+    }
+
+    public void Init(Vector3 vector3)
+    {
+        float minRange = -6;
+        float maxRange = 6;
+
+        float randomizeX = UnityEngine.Random.Range(minRange, maxRange);
+        float randomizeZ = UnityEngine.Random.Range(minRange, maxRange);
+
+        _meshRenderer.material.color = _colorWhite;
+        gameObject.SetActive(true);
+        transform.position = new Vector3(vector3.x + randomizeX, vector3.y, vector3.z + randomizeZ);
     }
 }
