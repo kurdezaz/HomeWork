@@ -8,7 +8,7 @@ public class EffectsButton : MonoBehaviour
 
     [SerializeField] private int _numberEffect;
 
-    private void Update()
+    private void Awake()
     {
         _button.onClick.AddListener(ClickOnEffect);
     }
