@@ -13,7 +13,7 @@ public class EffectsButton : MonoBehaviour
 
     private void OnDisable()
     {
-        _button.onClick.RemoveAllListeners();
+        _button.onClick.RemoveListener(ClickOnEffect);
     }
 
     private void ClickOnEffect()

@@ -19,7 +19,7 @@ public class AudioToggle : MonoBehaviour
 
     private void OnDisable()
     {
-        _toggle.onValueChanged.RemoveAllListeners();
+        _toggle.onValueChanged.RemoveListener(ToggleAudio);
     }
 
     public void ToggleAudio(bool enabled)
