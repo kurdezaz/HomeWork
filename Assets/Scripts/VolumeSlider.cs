@@ -18,9 +18,14 @@ public class VolumeSlider : MonoBehaviour
         EffectsVolume
     }
 
-    private void Awake()
+    private void OnEnable()
     {
         _slider.onValueChanged.AddListener(ChangeMasterVolume);
+    }
+
+    private void OnDisable()
+    {
+        _slider.onValueChanged.RemoveAllListeners();
     }
 
     public void ChangeMasterVolume(float volume)

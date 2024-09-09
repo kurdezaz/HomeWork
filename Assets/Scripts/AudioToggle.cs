@@ -12,9 +12,14 @@ public class AudioToggle : MonoBehaviour
 
     private string _masterVolume = "MasterVolume";
 
-    private void Awake()
+    private void OnEnable()
     {
         _toggle.onValueChanged.AddListener(ToggleAudio);
+    }
+
+    private void OnDisable()
+    {
+        _toggle.onValueChanged.RemoveAllListeners();
     }
 
     public void ToggleAudio(bool enabled)

@@ -2,10 +2,8 @@ using UnityEngine;
 
 public class AudioClips : MonoBehaviour
 {
-    [SerializeField] private AudioSource[] _audioSources;
-
-    public void PlayEffect(int numberEffect)
+    public void PlayEffect(AudioSource Effect)
     {
-        _audioSources[numberEffect].Play();
+        Effect.Play();
     }
 }

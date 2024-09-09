@@ -3,18 +3,22 @@ using UnityEngine.UI;
 
 public class EffectsButton : MonoBehaviour
 {
-    [SerializeField] private AudioClips _audioMixer;
+    [SerializeField] private AudioClips _audioClips;
     [SerializeField] private Button _button;
+    [SerializeField] private AudioSource _effect;
 
-    [SerializeField] private int _numberEffect;
-
-    private void Awake()
+    private void OnEnable()
     {
         _button.onClick.AddListener(ClickOnEffect);
     }
 
+    private void OnDisable()
+    {
+        _button.onClick.RemoveAllListeners();
+    }
+
     private void ClickOnEffect()
     {
-        _audioMixer.PlayEffect(_numberEffect);
+        _audioClips.PlayEffect(_effect);
     }
 }
