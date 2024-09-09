@@ -30,7 +30,6 @@ public class Bomb : MonoBehaviour
 
     private IEnumerator DisappearOnTime()
     {
-        //float timeDelay = UnityEngine.Random.Range(_minLifeTime, _maxLifeTime);
         var wait = new WaitForSeconds(_lifeTime/_disappearingTimes);
         var color = _meshRenderer.material.color;
 
@@ -46,7 +45,6 @@ public class Bomb : MonoBehaviour
 
     private IEnumerator DieOnTime()
     {
-        //float timeDelay = UnityEngine.Random.Range(_minLifeTime, _maxLifeTime);
         var wait = new WaitForSeconds(_lifeTime);
 
         yield return wait;
@@ -54,7 +52,6 @@ public class Bomb : MonoBehaviour
         _meshRenderer.material.color = _baseColor;
         DiedBomb?.Invoke(this);
     }
-
 
     public void Init(Vector3 position)
     {
