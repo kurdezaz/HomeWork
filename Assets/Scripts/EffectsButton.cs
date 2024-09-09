@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class EffectsButton : MonoBehaviour
 {
-    [SerializeField] private AudioClips _audioClips;
     [SerializeField] private Button _button;
     [SerializeField] private AudioSource _effect;
 
@@ -19,6 +18,6 @@ public class EffectsButton : MonoBehaviour
 
     private void ClickOnEffect()
     {
-        _audioClips.PlayEffect(_effect);
+        _effect.Play();
     }
 }
