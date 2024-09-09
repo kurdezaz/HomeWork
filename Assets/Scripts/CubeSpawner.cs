@@ -1,14 +1,22 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class CubeSpawner : MonoBehaviour
+public class CubeSpawner : Spawner<Cube>
 {
-    [SerializeField] private CubePool _cubePool;
+    [SerializeField] private Cube _cubePrefab;
+    [SerializeField] private BombSpawner _bombSpawner;
 
     private float _delay = 1f;
+    private Queue<Cube> _cubes;
+
+    public int AllSpawnedCubes { get; private set; }
+    public int ActiveCubes { get; private set; }
 
     private void Awake()
     {
+        _cubes = new Queue<Cube>();
         StartCoroutine(SpawnCubes());
     }
 
@@ -25,14 +33,19 @@ public class CubeSpawner : MonoBehaviour
 
     private void CreateCube()
     {
-        var cube = _cubePool.GetCube();
+        Cube cube = GetObject(_cubes,_cubePrefab);
         cube.Init(transform.position);
-        cube.Died += PutCube;
+        cube.DiedCube += PutCube;
+        AllSpawnedCubes++;
+        ActiveCubes++;
     }
 
-    private void PutCube(Cube cube)
+    private void PutCube(Cube cubePrefab)
     {
-        cube.Died -= PutCube;
-        _cubePool.PutCube(cube);
+        cubePrefab.DiedCube -= PutCube;
+        _bombSpawner.CreateBomb(cubePrefab.transform.position);
+        ActiveCubes--;
+        cubePrefab.gameObject.SetActive(false);
+        _cubes.Enqueue(cubePrefab);
     }
 }

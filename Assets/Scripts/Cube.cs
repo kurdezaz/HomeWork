@@ -12,7 +12,7 @@ public class Cube : MonoBehaviour
     private float _minLifeTime = 2f;
     private float _maxLifeTime = 5f;
 
-    public event Action<Cube> Died;
+    public event Action<Cube> DiedCube;
 
     private void Awake()
     {
@@ -40,7 +40,7 @@ public class Cube : MonoBehaviour
         yield return wait;
         _meshRenderer.material.color = _colorWhite;
         _isCollisied = false;
-        Died?.Invoke(this);
+        DiedCube?.Invoke(this);
     }
 
     public void Init(Vector3 vector3)
