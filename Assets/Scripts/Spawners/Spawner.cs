@@ -9,7 +9,6 @@ public class Spawner<T>: MonoBehaviour where T : MonoBehaviour
 
     public int CreatedObjects { get; private set; }
     
-
     private void Awake()
     {
         _objectPool = new ObjectPool<T>();
