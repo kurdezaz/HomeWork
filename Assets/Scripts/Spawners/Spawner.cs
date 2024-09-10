@@ -2,9 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Spawner<T>: MonoBehaviour where T : MonoBehaviour
 {
+    public ObjectPool<T> _objectPool;
+
     public int CreatedObjects { get; private set; }
+    
+
+    private void Awake()
+    {
+        _objectPool = new ObjectPool<T>();
+    }
 
     public T Spawn(T prefab)
     {
@@ -20,6 +29,6 @@ public class Spawner<T>: MonoBehaviour where T : MonoBehaviour
             return Spawn(objectPrefab);
         }
 
-        return objects.Dequeue();
+        return _objectPool.GetObject();
     }
 }

@@ -7,31 +7,26 @@ public class BombSpawner : Spawner<Bomb>
     [SerializeField] private Bomb _bombPrefab;
     [SerializeField] private Exploder _exploder;
 
-    private Queue<Bomb> _bombs;
-
     public int AllSpawnedBombs { get; private set; }
     public int ActiveBombs { get; private set; }
 
-    private void Awake()
-    {
-        _bombs = new Queue<Bomb>();
-    }
+    private void Awake(){}
 
     public void CreateBomb(Vector3 position)
     {
-        Bomb bomb = GetObject(_bombs, _bombPrefab);
+        Bomb bomb = GetObject(_objectPool.ReturnQueue(), _bombPrefab);
         bomb.Init(position);
-        bomb.DiedBomb += PutBomb;
+        bomb.DiedEvent += PutBomb;
         AllSpawnedBombs++;
         ActiveBombs++;
     }
 
-    private void PutBomb(Bomb BombPrefab)
+    private void PutBomb(Bomb bombPrefab)
     {
-        BombPrefab.DiedBomb -= PutBomb;
-        _exploder.ExplodeAll(BombPrefab);
+        bombPrefab.DiedEvent -= PutBomb;
+        _exploder.ExplodeAll(bombPrefab);
         ActiveBombs--;
-        BombPrefab.gameObject.SetActive(false);
-        _bombs.Enqueue(BombPrefab);
+        bombPrefab.gameObject.SetActive(false);
+        _objectPool.PutObject(bombPrefab);
     }
 }

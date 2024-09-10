@@ -13,7 +13,7 @@ public class Bomb : MonoBehaviour
     private float _disappearingTimes = 10;
     private Color _baseColor;
 
-    public event Action<Bomb> DiedBomb;
+    public event Action<Bomb> DiedEvent;
 
     private void Awake()
     {
@@ -26,6 +26,12 @@ public class Bomb : MonoBehaviour
     {
         StartCoroutine(DieOnTime());
         StartCoroutine(DisappearOnTime());
+    }
+
+    public void Init(Vector3 position)
+    {
+        gameObject.SetActive(true);
+        transform.position = position;
     }
 
     private IEnumerator DisappearOnTime()
@@ -48,14 +54,7 @@ public class Bomb : MonoBehaviour
         var wait = new WaitForSeconds(_lifeTime);
 
         yield return wait;
-        StopCoroutine(DisappearOnTime());
         _meshRenderer.material.color = _baseColor;
-        DiedBomb?.Invoke(this);
-    }
-
-    public void Init(Vector3 position)
-    {
-        gameObject.SetActive(true);
-        transform.position = position;
+        DiedEvent?.Invoke(this);
     }
 }
